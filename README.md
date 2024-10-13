@@ -2,22 +2,19 @@
 iCloud Force Sync create random files in iCloud documents directory to force synchronization. 
 
 ## Instruction
-1. `go build *.go`
-2. Replace path in `dev.localhost.iCloudForceSync.plist` file
-3. `cp ./dev.localhost.iCloudForceSync.plist $HOME/Library/LaunchAgents/dev.localhost.iCloudForceSync.plist` 
-4. `launchctl load dev.localhost.iCloudForceSync.plist`
+1. Download latest version from [link](https://github.com/psmarcin/icloud-force-sync/releases)
+2. Run it `./icloduf-force-sync`
+
+It will automatically add task in background to run every time your use your computer. 
 
 
-## Edit launchctl
+## Technical
+### Load launchctl
 ```bash
-micro dev.psmarcin.iCloudForceSync.plist
-```
-## Load launchctl
-```bash
-launchctl load dev.psmarcin.iCloudForceSync.plist
+launchctl load dev.localhost.iCloudForceSync.plist
 ```
 
 ## Unload
 ```bash
-launchctl unload dev.psmarcin.iCloudForceSync.plist
+launchctl unload dev.localhost.iCloudForceSync.plist
 ```
