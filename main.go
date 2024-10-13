@@ -11,14 +11,18 @@ import (
 	"time"
 )
 
-////go:embed dev.localhost.iCloudForceSync.plist.template
-//var plistTemplate []byte
-
 func main() {
-	fmt.Println("starting...")
 	l := slog.Default()
 	home, err := os.UserHomeDir()
 	if err != nil {
+		panic(err)
+	}
+
+	pl, err := newPlist()
+	if err != nil {
+		panic(err)
+	}
+	if err := pl.render(); err != nil {
 		panic(err)
 	}
 
@@ -149,23 +153,3 @@ func cleanup(tmpFilesDir string) {
 	}
 	l.Info("cleaned up", "dir", tmpFilesDir)
 }
-
-//
-//func renderTemplate(plistFilePath, binaryFilePath string) error {
-//	plistFilePath := path.Join(homeDir, "/dev.localhost.iCloudForceSync.plist")
-//	t, err := template.New("plist").Parse(string(plistTemplate))
-//	if err != nil {
-//		return errors.Wrapf(err, "failed to parse template")
-//	}
-//
-//	f, err := os.Create(plistFilePath)
-//	if err != nil {
-//		return errors.Wrapf(err, "failed to create plist file: %s", plistFilePath)
-//	}
-//
-//	if err := t.Execute(f, binaryFilePath); err != nil {
-//		return errors.Wrapf(err, "failed to execute template and save to file: %s", plistFilePath)
-//	}
-//
-//	return nil
-//}
